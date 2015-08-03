@@ -28,19 +28,19 @@ func getVar(envVar string) (string, error) {
 	return val, nil
 }
 
-// DiscoverURL finds the specified URL for a service based off of the service's name and which
+// URL finds the specified URL for a service based off of the service's name and which
 // interface you are accessing. Values are found in environment variables fitting the scheme:
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_{PROTO,HOST,PORT}.
-func DiscoverURL(service, name string) (string, error) {
-	proto, err := DiscoverProto(service, name)
+func URL(service, name string) (string, error) {
+	proto, err := Proto(service, name)
 	if err != nil {
 		return "", err
 	}
-	host, err := DiscoverHost(service, name)
+	host, err := Host(service, name)
 	if err != nil {
 		return "", err
 	}
-	port, err := DiscoverPort(service, name)
+	port, err := Port(service, name)
 	if err != nil {
 		return "", err
 	}
@@ -52,28 +52,28 @@ func DiscoverURL(service, name string) (string, error) {
 	return u.String(), nil
 }
 
-// DiscoverProto finds the specified protocol for a service based off of the service's name and which
+// Proto finds the specified protocol for a service based off of the service's name and which
 // interface you are accessing. Values are found in environment variables fitting the scheme:
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_PROTO.
-func DiscoverProto(service, name string) (string, error) {
+func Proto(service, name string) (string, error) {
 	template := fmt.Sprintf(templateVar, service, name)
 
 	return getVar(fmt.Sprintf(template, "PROTO"))
 }
 
-// DiscoverHost finds the specified host for a service based off of the service's name and which
+// Host finds the specified host for a service based off of the service's name and which
 // interface you are accessing. Values are found in environment variables fitting the scheme:
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_HOST.
-func DiscoverHost(service, name string) (string, error) {
+func Host(service, name string) (string, error) {
 	template := fmt.Sprintf(templateVar, service, name)
 
 	return getVar(fmt.Sprintf(template, "HOST"))
 }
 
-// DiscoverPort finds the specified port for a service based off of the service's name and which
+// Port finds the specified port for a service based off of the service's name and which
 // interface you are accessing. Values are found in environment variables fitting the scheme:
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_PORT.
-func DiscoverPort(service, name string) (string, error) {
+func Port(service, name string) (string, error) {
 	template := fmt.Sprintf(templateVar, service, name)
 
 	return getVar(fmt.Sprintf(template, "PORT"))

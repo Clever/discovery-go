@@ -37,7 +37,7 @@ func TestMain(m *testing.M) {
 func TestTCPDiscovery(t *testing.T) {
 	expected := "tcp://redis.com:6379"
 
-	url, err := discovery.DiscoverURL("redis", "tcp")
+	url, err := discovery.URL("redis", "tcp")
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {
@@ -48,7 +48,7 @@ func TestTCPDiscovery(t *testing.T) {
 func TestHTTPSDiscovery(t *testing.T) {
 	expected := "https://api.google.com:80"
 
-	url, err := discovery.DiscoverURL("google", "api")
+	url, err := discovery.URL("google", "api")
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {
@@ -57,7 +57,7 @@ func TestHTTPSDiscovery(t *testing.T) {
 }
 
 func TestErrorOnFailure(t *testing.T) {
-	_, err := discovery.DiscoverURL("break", "api")
+	_, err := discovery.URL("break", "api")
 	if err == nil {
 		t.Fatalf("Expected error")
 	}
