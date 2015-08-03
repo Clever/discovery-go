@@ -1,2 +1,3 @@
-# discovery-go
-Programmatically find services
+# discovery
+
+[Godoc](http://godoc.org/github.com/Clever/discovery-go)
