@@ -37,8 +37,10 @@ func TestMain(m *testing.M) {
 func TestTCPDiscovery(t *testing.T) {
 	expected := "tcp://redis.com:6379"
 
-	url := discovery.Discover("redis", "tcp")
-	if url != expected {
+	url, err := discovery.DiscoverURL("redis", "tcp")
+	if err != nil {
+		t.Fatalf("Unexpected error, %s", err)
+	} else if url != expected {
 		t.Fatalf("Unexpected result, expected: %s, receieved: %s", expected, url)
 	}
 }
@@ -46,17 +48,17 @@ func TestTCPDiscovery(t *testing.T) {
 func TestHTTPSDiscovery(t *testing.T) {
 	expected := "https://api.google.com:80"
 
-	url := discovery.Discover("google", "api")
-	if url != expected {
+	url, err := discovery.DiscoverURL("google", "api")
+	if err != nil {
+		t.Fatalf("Unexpected error, %s", err)
+	} else if url != expected {
 		t.Fatalf("Unexpected result, expected: %s, receieved: %s", expected, url)
 	}
 }
 
-func TestPanicOnFailure(t *testing.T) {
-	defer func() {
-		if r := recover(); r == nil {
-			t.Errorf("Discover() should panic with missing environment variables")
-		}
-	}()
-	_ = discovery.Discover("break", "api")
+func TestErrorOnFailure(t *testing.T) {
+	_, err := discovery.DiscoverURL("break", "api")
+	if err == nil {
+		t.Fatalf("Expected error")
+	}
 }
