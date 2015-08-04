@@ -29,6 +29,8 @@ func TestMain(m *testing.M) {
 
 		"SERVICE_BREAK_API_HOST": "missing.proto",
 		"SERVICE_BREAK_API_PORT": "5000",
+
+		"SERVICE_LONG_APP_NAME_API_HOST": "arbitrary",
 	})
 
 	os.Exit(m.Run())
@@ -60,5 +62,12 @@ func TestErrorOnFailure(t *testing.T) {
 	_, err := discovery.URL("break", "api")
 	if err == nil {
 		t.Fatalf("Expected error")
+	}
+}
+
+func TestLongArbitraryNameWithDashesa(t *testing.T) {
+	_, err := discovery.Host("long-app-name", "api")
+	if err != nil {
+		t.Fatalf("Unexpected error with app name w/ dashes, %s", err)
 	}
 }

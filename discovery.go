@@ -19,6 +19,7 @@ const (
 
 func getVar(envVar string) (string, error) {
 	envVar = strings.ToUpper(envVar)
+	envVar = strings.Replace(envVar, "-", "_", -1)
 	val := os.Getenv(envVar)
 	if val == "" {
 		return "", errors.New(kv.FormatLog("discovery-go", kv.Error, "missing env var", m{
