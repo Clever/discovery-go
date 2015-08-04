@@ -57,7 +57,6 @@ func URL(service, name string) (string, error) {
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_PROTO.
 func Proto(service, name string) (string, error) {
 	template := fmt.Sprintf(templateVar, service, name)
-
 	return getVar(fmt.Sprintf(template, "PROTO"))
 }
 
@@ -66,7 +65,6 @@ func Proto(service, name string) (string, error) {
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_HOST.
 func Host(service, name string) (string, error) {
 	template := fmt.Sprintf(templateVar, service, name)
-
 	return getVar(fmt.Sprintf(template, "HOST"))
 }
 
@@ -75,6 +73,5 @@ func Host(service, name string) (string, error) {
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_PORT.
 func Port(service, name string) (string, error) {
 	template := fmt.Sprintf(templateVar, service, name)
-
 	return getVar(fmt.Sprintf(template, "PORT"))
 }
