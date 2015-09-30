@@ -35,7 +35,7 @@ func TestTCPDiscovery(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {
-		t.Fatalf("Unexpected result, expected: %s, receieved: %s", expected, url)
+		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, url)
 	}
 
 	u, err := discovery.URL("redis", "tcp")
@@ -55,7 +55,7 @@ func TestHTTPSDiscovery(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {
-		t.Fatalf("Unexpected result, expected: %s, receieved: %s", expected, url)
+		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, url)
 	}
 }
 
