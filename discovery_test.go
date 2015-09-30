@@ -42,9 +42,9 @@ func TestTCPDiscovery(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if u.String() != expected {
-		t.Fatalf("unexpected result, expected: %s, receieved: %s", expected, u.String())
+		t.Fatalf("unexpected result, expected: %s, received: %s", expected, u.String())
 	} else if u.Scheme != expectedScheme {
-		t.Fatalf("unexpected result, expected: %s, receieved: %s", expectedScheme, u.Scheme)
+		t.Fatalf("unexpected result, expected: %s, received: %s", expectedScheme, u.Scheme)
 	}
 }
 
@@ -66,7 +66,7 @@ func TestErrorOnFailure(t *testing.T) {
 	}
 }
 
-func TestLongArbitraryNameWithDashesa(t *testing.T) {
+func TestLongArbitraryNameWithDashes(t *testing.T) {
 	_, err := discovery.URLString("long-app-name", "api")
 	if err != nil {
 		t.Fatalf("Unexpected error with app name w/ dashes, %s", err)
