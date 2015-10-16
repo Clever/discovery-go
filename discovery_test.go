@@ -31,6 +31,10 @@ func TestMain(m *testing.M) {
 		"SERVICE_BREAK_API_PORT": "5000",
 
 		"SERVICE_LONG_APP_NAME_API_HOST": "arbitrary",
+
+		"SERVICE_WITH_AUTH_HTTP_PROTO": "https",
+		"SERVICE_WITH_AUTH_HTTP_HOST":  "user:pass@api.google.com",
+		"SERVICE_WITH_AUTH_HTTP_PORT":  "80",
 	})
 
 	os.Exit(m.Run())
@@ -40,6 +44,17 @@ func TestTCPDiscovery(t *testing.T) {
 	expected := "tcp://redis.com:6379"
 
 	url, err := discovery.URL("redis", "tcp")
+	if err != nil {
+		t.Fatalf("Unexpected error, %s", err)
+	} else if url != expected {
+		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, url)
+	}
+}
+
+func TestURLwithBasicAuth(t *testing.T) {
+	expected := "https://user:pass@api.google.com:80"
+
+	url, err := discovery.URL("with-auth", "http")
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {

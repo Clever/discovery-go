@@ -22,7 +22,7 @@ func getVar(envVar string) (string, error) {
 	envVar = strings.Replace(envVar, "-", "_", -1)
 	val := os.Getenv(envVar)
 	if val == "" {
-		return "", errors.New(kv.FormatLog("discovery-go", kv.Error, "missing env var", m{
+		return "", errors.New(kv.FormatLog("discovery-go", kv.Error, "missing.env.var", m{
 			"var": envVar,
 		}))
 	}
@@ -46,9 +46,13 @@ func URL(service, name string) (string, error) {
 		return "", err
 	}
 
-	u := url.URL{
-		Scheme: proto,
-		Host:   fmt.Sprintf("%s:%s", host, port),
+	rawURL := fmt.Sprintf("%s://%s:%s", proto, host, port)
+	u, err := url.Parse(rawURL)
+	if err != nil {
+		return "", errors.New(kv.FormatLog("discovery-go", kv.Error, "missing env var", m{
+			"url":   rawURL,
+			"error": fmt.Errorf("Failed to parse URL: %s", err.Error()),
+		}))
 	}
 	return u.String(), nil
 }
