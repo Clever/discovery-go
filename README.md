@@ -25,11 +25,7 @@ if err != nil {
 }
 
 
-redisHOST, err := discovery.Host("redis", "tcp")
-if err != nil {
-    logger.Fatal("ERROR: " + err.Error())
-}
-redisPORT, err := discovery.Port("redis", "tcp")
+redisHostPort, err := discovery.HostPort("redis", "tcp")
 if err != nil {
     logger.Fatal("ERROR: " + err.Error())
 }
