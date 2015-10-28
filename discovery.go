@@ -3,6 +3,7 @@ package discovery
 import (
 	"errors"
 	"fmt"
+	"net"
 	"net/url"
 	"os"
 	"strings"
@@ -55,6 +56,22 @@ func URL(service, name string) (string, error) {
 		}))
 	}
 	return u.String(), nil
+}
+
+// HostPort finds the specified host:port combo for a service based off of the service's name and
+// which interface you are accessing. Values are found in environment variables fitting the scheme:
+// SERVICE_{SERVICE NAME}_{INTERFACE NAME}_{PROTO,HOST,PORT}.
+func HostPort(service, name string) (string, error) {
+	host, err := Host(service, name)
+	if err != nil {
+		return "", err
+	}
+	port, err := Port(service, name)
+	if err != nil {
+		return "", err
+	}
+
+	return net.JoinHostPort(host, port), nil
 }
 
 // Proto finds the specified protocol for a service based off of the service's name and which

@@ -24,12 +24,17 @@ if err != nil {
     log.Fatal("ERROR: " + err.Error())
 }
 
-
-redisHOST, err := discovery.Host("redis", "tcp")
+redisHostPort, err := discovery.HostPort("redis", "tcp")
 if err != nil {
     logger.Fatal("ERROR: " + err.Error())
 }
-redisPORT, err := discovery.Port("redis", "tcp")
+
+redisHost, err := discovery.Host("redis", "tcp")
+if err != nil {
+    logger.Fatal("ERROR: " + err.Error())
+}
+
+redisPort, err := discovery.Port("redis", "tcp")
 if err != nil {
     logger.Fatal("ERROR: " + err.Error())
 }
