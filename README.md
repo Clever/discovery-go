@@ -44,7 +44,9 @@ if err != nil {
 
 This library looks up environment variables(eventually maybe not). For it to work, your environment variables need to adhere to the following convention:
 
-SERVICE_\<SERVICE_NAME\>_\<PROTOCOL\>_\<PROTO|HOST|PORT\>
+```
+SERVICE_{SERVICE_NAME}_{PROTOCOL}_{PROTO|HOST|PORT}
+```
 
 Here is an example using redis:
 ```bash
