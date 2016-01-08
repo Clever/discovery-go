@@ -10,12 +10,6 @@ This library currently is just an abstraction around reading environment variabl
 
 [Godoc Documentation](http://godoc.org/github.com/Clever/discovery-go)
 
-### import
-
-```go
-import "gopkg.in/Clever/discovery-go.v1"
-```
-
 ### Examples
 
 ```go
