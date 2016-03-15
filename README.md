@@ -18,17 +18,17 @@ if err != nil {
     log.Fatal("ERROR: " + err.Error())
 }
 
-redisHostPort, err := discovery.HostPort("redis", "tcp")
+stokedHostPort, err := discovery.HostPort("stoked", "thrift")
 if err != nil {
     logger.Fatal("ERROR: " + err.Error())
 }
 
-redisHost, err := discovery.Host("redis", "tcp")
+stokedHost, err := discovery.Host("stoked", "thrift")
 if err != nil {
     logger.Fatal("ERROR: " + err.Error())
 }
 
-redisPort, err := discovery.Port("redis", "tcp")
+stokedPort, err := discovery.Port("stoked", "thrift")
 if err != nil {
     logger.Fatal("ERROR: " + err.Error())
 }
