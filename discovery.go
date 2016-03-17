@@ -8,11 +8,9 @@ import (
 	"os"
 	"strings"
 
-	kv "gopkg.in/Clever/kayvee-go.v2"
+	"gopkg.in/Clever/kayvee-go.v3"
+	"gopkg.in/Clever/kayvee-go.v3/logger"
 )
-
-// m is a convenience type for using kv.
-type m map[string]interface{}
 
 const (
 	templateVar = "SERVICE_%s_%s_%%s"
@@ -23,7 +21,7 @@ func getVar(envVar string) (string, error) {
 	envVar = strings.Replace(envVar, "-", "_", -1)
 	val := os.Getenv(envVar)
 	if val == "" {
-		return "", errors.New(kv.FormatLog("discovery-go", kv.Error, "missing.env.var", m{
+		return "", errors.New(kayvee.FormatLog("discovery-go", kayvee.Error, "missing.env.var", logger.M{
 			"var": envVar,
 		}))
 	}
@@ -50,7 +48,7 @@ func URL(service, name string) (string, error) {
 	rawURL := fmt.Sprintf("%s://%s:%s", proto, host, port)
 	u, err := url.Parse(rawURL)
 	if err != nil {
-		return "", errors.New(kv.FormatLog("discovery-go", kv.Error, "missing env var", m{
+		return "", errors.New(kayvee.FormatLog("discovery-go", kayvee.Error, "missing env var", logger.M{
 			"url":   rawURL,
 			"error": fmt.Errorf("Failed to parse URL: %s", err.Error()),
 		}))
