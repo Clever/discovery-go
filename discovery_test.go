@@ -1,11 +1,9 @@
-package discovery_test
+package discovery
 
 import (
 	"log"
 	"os"
 	"testing"
-
-	"github.com/Clever/discovery-go"
 )
 
 func insertPairs(pairs map[string]string) {
@@ -43,7 +41,7 @@ func TestMain(m *testing.M) {
 func TestTCPDiscovery(t *testing.T) {
 	expected := "tcp://redis.com:6379"
 
-	url, err := discovery.URL("redis", "tcp")
+	url, err := URL("redis", "tcp")
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {
@@ -54,7 +52,7 @@ func TestTCPDiscovery(t *testing.T) {
 func TestURLwithBasicAuth(t *testing.T) {
 	expected := "https://user:pass@api.google.com:80"
 
-	url, err := discovery.URL("with-auth", "http")
+	url, err := URL("with-auth", "http")
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {
@@ -65,7 +63,7 @@ func TestURLwithBasicAuth(t *testing.T) {
 func TestHTTPSDiscovery(t *testing.T) {
 	expected := "https://api.google.com:80"
 
-	url, err := discovery.URL("google", "api")
+	url, err := URL("google", "api")
 	if err != nil {
 		t.Fatalf("Unexpected error, %s", err)
 	} else if url != expected {
@@ -74,14 +72,14 @@ func TestHTTPSDiscovery(t *testing.T) {
 }
 
 func TestErrorOnFailure(t *testing.T) {
-	_, err := discovery.URL("break", "api")
+	_, err := URL("break", "api")
 	if err == nil {
 		t.Fatalf("Expected error")
 	}
 }
 
 func TestLongArbitraryNameWithDashes(t *testing.T) {
-	_, err := discovery.Host("long-app-name", "api")
+	_, err := Host("long-app-name", "api")
 	if err != nil {
 		t.Fatalf("Unexpected error with app name w/ dashes, %s", err)
 	}
