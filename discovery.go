@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"gopkg.in/Clever/kayvee-go.v3"
-	"gopkg.in/Clever/kayvee-go.v3/logger"
+	"gopkg.in/Clever/kayvee-go.v4"
+	"gopkg.in/Clever/kayvee-go.v4/logger"
 )
 
 const (
