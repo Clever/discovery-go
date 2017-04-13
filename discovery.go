@@ -72,6 +72,22 @@ func HostPort(service, name string) (string, error) {
 	return net.JoinHostPort(host, port), nil
 }
 
+// ProtoHost finds the specified proto:host combo for a service based off of the service's name and
+// which interface you are accessing. Values are found in environment variables fitting the scheme:
+// SERVICE_{SERVICE NAME}_{INTERFACE NAME}_{PROTO,HOST,PORT}.
+func ProtoHost(service, name string) (string, error) {
+	proto, err := Proto(service, name)
+	if err != nil {
+		return "", err
+	}
+	host, err := Host(service, name)
+	if err != nil {
+		return "", err
+	}
+
+	return fmt.Sprintf("%s://%s", proto, host), nil
+}
+
 // Proto finds the specified protocol for a service based off of the service's name and which
 // interface you are accessing. Values are found in environment variables fitting the scheme:
 // SERVICE_{SERVICE NAME}_{INTERFACE NAME}_PROTO.

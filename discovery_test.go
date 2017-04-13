@@ -84,3 +84,14 @@ func TestLongArbitraryNameWithDashes(t *testing.T) {
 		t.Fatalf("Unexpected error with app name w/ dashes, %s", err)
 	}
 }
+
+func TestProtoHost(t *testing.T) {
+	expected := "https://api.google.com"
+
+	protoHost, err := ProtoHost("google", "api")
+	if err != nil {
+		t.Fatalf("Unexpected error: %s", err)
+	} else if protoHost != expected {
+		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, protoHost)
+	}
+}
