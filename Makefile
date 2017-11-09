@@ -4,9 +4,13 @@ include golang.mk
 .PHONY: test $(PKGS)
 SHELL := /bin/bash
 PKGS = $(shell go list ./...)
-$(eval $(call golang-version-check,1.8))
+$(eval $(call golang-version-check,1.9))
 
 test: $(PKGS)
 $(PKGS): golang-test-all-strict-deps
 	@go get -d -t $@
 	$(call golang-test-all-strict,$@)
+
+
+install_deps: golang-dep-vendor-deps
+	$(call golang-dep-vendor)
