@@ -50,7 +50,7 @@ func URL(service, name string) (string, error) {
 	if err != nil {
 		return "", errors.New(kayvee.FormatLog("discovery-go", kayvee.Error, "missing env var", logger.M{
 			"url":   rawURL,
-			"error": fmt.Errorf("Failed to parse URL: %s", err.Error()),
+			"error": fmt.Sprintf("Failed to parse URL: %s", err),
 		}))
 	}
 	return u.String(), nil
