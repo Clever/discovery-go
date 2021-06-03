@@ -12,5 +12,5 @@ $(PKGS): golang-test-all-strict-deps
 	$(call golang-test-all-strict,$@)
 
 
-install_deps: golang-dep-vendor-deps
-	$(call golang-dep-vendor)
+install_deps:
+	go mod vendor
