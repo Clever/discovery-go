@@ -1,5 +1,5 @@
 module github.com/Clever/discovery-go
 
-go 1.13
+go 1.16
 
-require github.com/Clever/kayvee-go/v7 v7.0.0
+require github.com/Clever/kayvee-go/v7 v7.4.0
