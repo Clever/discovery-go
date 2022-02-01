@@ -4,7 +4,7 @@ include golang.mk
 .PHONY: test $(PKGS)
 SHELL := /bin/bash
 PKGS = $(shell go list ./... | grep -v /vendor)
-$(eval $(call golang-version-check,1.13))
+$(eval $(call golang-version-check,1.16))
 
 test: $(PKGS)
 $(PKGS): golang-test-all-strict-deps
