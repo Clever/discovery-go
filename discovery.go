@@ -1,11 +1,15 @@
 package discovery
 
 import (
+	"errors"
 	"fmt"
 	"net"
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/Clever/kayvee-go/v7"
+	"github.com/Clever/kayvee-go/v7/logger"
 )
 
 const (
@@ -17,7 +21,9 @@ func getVar(envVar string) (string, error) {
 	envVar = strings.Replace(envVar, "-", "_", -1)
 	val := os.Getenv(envVar)
 	if val == "" {
-		return "", fmt.Errorf("discovery-go is missing env var: %v", envVar)
+		return "", errors.New(kayvee.FormatLog("discovery-go", kayvee.Error, "missing.env.var", logger.M{
+			"var": envVar,
+		}))
 	}
 	return val, nil
 }
@@ -42,7 +48,10 @@ func URL(service, name string) (string, error) {
 	rawURL := fmt.Sprintf("%s://%s:%s", proto, host, port)
 	u, err := url.Parse(rawURL)
 	if err != nil {
-		return "", fmt.Errorf("discovery-go error: %v. Failed to parse URL: %s", err, rawURL)
+		return "", errors.New(kayvee.FormatLog("discovery-go", kayvee.Error, "missing env var", logger.M{
+			"url":   rawURL,
+			"error": fmt.Sprintf("Failed to parse URL: %s", err),
+		}))
 	}
 	return u.String(), nil
 }
