@@ -28,5 +28,6 @@ jobs:
     - persist_to_workspace:
         root: ~/go/src/github.com/Clever
         paths: "."
+    - clone-ci-scripts
     - run: if [ "${CIRCLE_BRANCH}" == "master" ]; then $HOME/ci-scripts/circleci/github-release $GH_RELEASE_TOKEN; fi;
 
