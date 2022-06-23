@@ -29,6 +29,6 @@ jobs:
         root: ~/go/src/github.com/Clever
         paths: "."
     - clone-ci-scripts
-    - command: cd working_directory
+    - run: cd working_directory
     - run: if [ "${CIRCLE_BRANCH}" == "master" ]; then $HOME/ci-scripts/circleci/github-release $GH_RELEASE_TOKEN; fi;
 
