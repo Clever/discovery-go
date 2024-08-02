@@ -4,7 +4,7 @@ executors:
   common-executor:
     working_directory: ~/go/src/github.com/Clever/discovery-go
     docker:
-    - image: cimg/go:1.16
+    - image: cimg/go:1.21
     environment:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
