@@ -33,6 +33,9 @@ func TestMain(m *testing.M) {
 		"SERVICE_WITH_AUTH_HTTP_PROTO": "https",
 		"SERVICE_WITH_AUTH_HTTP_HOST":  "user:pass@api.google.com",
 		"SERVICE_WITH_AUTH_HTTP_PORT":  "80",
+
+		"EXTERNAL_URL_CLEVER_COM":     "https://clever.com:443",
+		"EXTERNAL_URL_API_CLEVER_COM": "https://api.clever.com:443",
 	})
 
 	os.Exit(m.Run())
@@ -93,5 +96,27 @@ func TestProtoHost(t *testing.T) {
 		t.Fatalf("Unexpected error: %s", err)
 	} else if protoHost != expected {
 		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, protoHost)
+	}
+}
+
+func TestSimpleExternalURL(t *testing.T) {
+	expected := "https://clever.com:443"
+
+	url, err := ExternalURL("clever.com")
+	if err != nil {
+		t.Fatalf("Unexpected error: %s", err)
+	} else if url != expected {
+		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, url)
+	}
+}
+
+func TestComplexExternalURL(t *testing.T) {
+	expected := "https://api.clever.com:443"
+
+	url, err := ExternalURL("api.clever.com")
+	if err != nil {
+		t.Fatalf("Unexpected error: %s", err)
+	} else if url != expected {
+		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, url)
 	}
 }

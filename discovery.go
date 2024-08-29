@@ -9,7 +9,8 @@ import (
 )
 
 const (
-	templateVar = "SERVICE_%s_%s_%%s"
+	templateVar    = "SERVICE_%s_%s_%%s"
+	externalURLVar = "EXTERNAL_URL_%s"
 )
 
 func getVar(envVar string) (string, error) {
@@ -101,4 +102,20 @@ func Host(service, name string) (string, error) {
 func Port(service, name string) (string, error) {
 	template := fmt.Sprintf(templateVar, service, name)
 	return getVar(fmt.Sprintf(template, "PORT"))
+}
+
+// ExternalURL finds the specified URL based on the input URL.
+// Values are found in environment variables fitting the scheme:
+// EXTERNAL_URL_{URL}.
+func ExternalURL(inputUrl string) (string, error) {
+	key := fmt.Sprintf(externalURLVar, strings.ReplaceAll(strings.ToUpper(inputUrl), ".", "_"))
+	rawUrl, err := getVar(key)
+	if err != nil {
+		return "", err
+	}
+	u, err := url.Parse(rawUrl)
+	if err != nil {
+		return "", fmt.Errorf("discovery-go error: %v. Failed to parse URL: %s", err, rawUrl)
+	}
+	return u.String(), nil
 }
