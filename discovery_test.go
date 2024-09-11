@@ -120,3 +120,14 @@ func TestComplexExternalURL(t *testing.T) {
 		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, url)
 	}
 }
+
+func TestComplexExternalProtoHost(t *testing.T) {
+	expected := "https://api.clever.com"
+
+	url, err := ExternalProtoHost("api.clever.com")
+	if err != nil {
+		t.Fatalf("Unexpected error: %s", err)
+	} else if url != expected {
+		t.Fatalf("Unexpected result, expected: %s, received: %s", expected, url)
+	}
+}

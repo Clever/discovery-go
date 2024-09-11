@@ -119,3 +119,11 @@ func ExternalURL(inputUrl string) (string, error) {
 	}
 	return u.String(), nil
 }
+
+func ExternalProtoHost(inputUrl string) (string, error) {
+	u, err := ExternalURL(inputUrl)
+	if err != nil {
+		return "", err
+	}
+	return strings.TrimSuffix(u, ":443"), nil
+}
